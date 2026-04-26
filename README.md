@@ -13,7 +13,14 @@ It is a **community-made desktop build** of the public website **[noises.online]
 
 ## Build the Windows executable
 
-From a PowerShell prompt at the repository root:
+**If you use Command Prompt (cmd)** — the black window where the prompt looks like `C:\...>` — **do not** run `.\scripts\build.ps1` directly. Cmd does not run PowerShell scripts, so nothing will be built. Use one of these instead:
+
+- **Easiest:** double-click **`build-and-zip.cmd`** in the project folder, or in cmd: `build-and-zip.cmd`  
+- Or, from the repo root in cmd, run in order: **`build.cmd`** then **`zip-release.cmd`**
+- Or call PowerShell explicitly:  
+  `powershell -NoProfile -ExecutionPolicy Bypass -File ".\scripts\build.ps1"`
+
+**From a PowerShell prompt** (prompt often starts with `PS `), at the repository root:
 
 ```powershell
 .\scripts\build.ps1
