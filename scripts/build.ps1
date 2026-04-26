@@ -18,4 +18,11 @@ nativefier "https://noises.online" $OutParent `
 	--tray true
 $built = Join-Path $OutParent "Noises Online-win32-x64"
 if (-not (Test-Path -LiteralPath (Join-Path $built "Noises Online.exe"))) { throw "Build incompleto: $built" }
-Write-Host "Listo: $built"
+$launcher = Join-Path $OutParent "Open-Noises-Online.bat"
+@(
+	'@echo off',
+	'REM Double-click here to start (the Noises Online-win32-x64 folder must stay next to this file).',
+	'start "" "%~dp0Noises Online-win32-x64\Noises Online.exe"'
+) | Set-Content -LiteralPath $launcher -Encoding ascii
+Write-Host "Done: $built"
+Write-Host "Shortcut (double-click): $launcher"

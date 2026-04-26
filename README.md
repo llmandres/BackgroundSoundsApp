@@ -19,7 +19,10 @@ From a PowerShell prompt at the repository root:
 .\scripts\build.ps1
 ```
 
-Output: `dist/Noises Online-win32-x64/Noises Online.exe`
+Output:
+
+- `dist/Noises Online-win32-x64/Noises Online.exe` (must stay with the rest of that folder — Electron needs the DLLs and `resources/` next to it).
+- `dist/Open-Noises-Online.bat` — double-click this for a quick start; it launches the `.exe` above. The same `.bat` is placed at the **root of the release ZIP** next to the folder, so users can run the app without drilling into subfolders.
 
 ## Create a release ZIP (for GitHub Releases)
 
