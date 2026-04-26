@@ -1,19 +1,21 @@
-# App empaquetada (Nativefier / Electron, ~150MB+; va en el ZIP de la Release, no en el repo)
+# Packaged app (Nativefier / Electron; large binaries go in GitHub Releases, not in the repo)
 Noises Online-win32-x64/
 out-tray/
 dist/
 
-# Paquetes y SO
+# Dependencies
 node_modules/
+
+# OS
 .DS_Store
 Thumbs.db
 desktop.ini
 *.log
 
-# Editor
+# Editor / IDE
 .idea/
 .vscode/
 *.code-workspace
 
-# Zips de release generados en la raíz
+# Local release archives (at repo root; keep sources only in git)
 /*.zip

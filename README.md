@@ -1,52 +1,45 @@
-# Noises Online (app de escritorio)
+# Noises Online — Windows desktop shell
 
-Empaquetado con [Nativefier](https://github.com/nativefier/nativefier): ventana 1024×768, tema oscuro inyectado, icono, optimización de caché, una sola instancia, aceleración GPU desactivada y cierre a la bandeja de sistema (como al cerrar la ventana el audio puede seguir en segundo plano).
+## What this is (and is not)
 
-**Sitio embebido:** [noises.online](https://noises.online) (enlace externo, no formamos parte de su proyecto).
+This repository is **not** the official *Noises Online* app and **I am not the author** of the website, sounds, or service.
 
-## Requisitos para compilar
+It is a **community-made desktop build** of the public website **[noises.online](https://noises.online)**, which is created and run by its author, **Stéphane Pigeon** (see the site for credits, donations, and terms). I only **wrap** that site in a local window using [Nativefier](https://github.com/nativefier/nativefier) (Electron) plus some custom assets (e.g. dark theme overlay, window size, system tray). All in-browser behaviour, audio, and rights remain those of the **original web project**.
 
-- Node.js y npm
+## Build requirements
+
+- Node.js and npm
 - `npm install -g nativefier`
 
-## Generar el ejecutable
+## Build the Windows executable
 
-En PowerShell, desde la raíz del repositorio:
+From a PowerShell prompt at the repository root:
 
 ```powershell
 .\scripts\build.ps1
 ```
 
-El resultado queda en `dist/Noises Online-win32-x64/Noises Online.exe`.
+Output: `dist/Noises Online-win32-x64/Noises Online.exe`
 
-## Generar el ZIP para una Release (GitHub)
+## Create a release ZIP (for GitHub Releases)
 
-Con el build hecho:
+After a successful build:
 
 ```powershell
 .\scripts\zip-release.ps1
 ```
 
-Se crea en la raíz: `Noises-Online-v<VERSION>-Win32-x64.zip` (la versión se lee del archivo `VERSION`).
+This creates a file at the repo root, e.g. `Noises-Online-v1.0.0-Win32-x64.zip` (version is read from the `VERSION` file).
 
-## Publicar en GitHub (un solo Release)
+## Publishing on GitHub
 
-1. Crea un repositorio vacío en GitHub y añade el `origin`.
-2. Sube el código (la carpeta `dist/` no se versiona; está en `.gitignore`).
-3. Crea y sube un tag, por ejemplo `v1.0.0` (alineado con `VERSION`):
+1. Create a new repository and add it as `origin`.
+2. Push the code. The `dist/` and packaged app folders are listed in `.gitignore` and are not committed.
+3. Create and push a version tag, e.g. `v1.0.0`, matching `VERSION`.
+4. Either attach the ZIP to a [GitHub Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) manually, or use the workflow in `.github/workflows/release.yml` (pushes a `v*` tag to trigger a Windows build and upload, if Actions is enabled).
 
-   ```powershell
-   git tag v1.0.0
-   git push origin main
-   git push origin v1.0.0
-   ```
+## Versioned in this repo
 
-4. Sube el ZIP: **Releases** → **Draft a new release** → elige el tag `v1.0.0` → adjunta el archivo `Noises-Online-v1.0.0-Win32-x64.zip` generado con `.\scripts\zip-release.ps1` → publica.
-
-Si activas **GitHub Actions** en el repo, al publicar un tag `v*` el workflow en `.github/workflows/release.yml` intentará compilar en Windows y adjuntar el ZIP automáticamente (puede fallar en forks sin permisos; en ese caso usa la subida manual del paso 4).
-
-## Contenido versionado
-
-- `nativefier-assets/` — CSS inyectado e icono para la app.
-- `scripts/` — build y empaquetado.
-- `VERSION` — número de release (cambiar y etiquetar en git al publicar)
+- `nativefier-assets/` — Injected CSS and icon used only for the shell (not the site’s own assets).
+- `scripts/` — `build.ps1` and `zip-release.ps1`
+- `VERSION` — Release number for tags and the ZIP name
