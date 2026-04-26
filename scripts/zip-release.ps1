@@ -15,6 +15,7 @@ $glob = Join-Path $Dist "*"
 Compress-Archive -Path $glob -DestinationPath $ZipPath -CompressionLevel Optimal
 $size = (Get-Item -LiteralPath $ZipPath).Length
 $minBytes = 10 * 1MB
-if ($size -lt $minBytes) { throw "ZIP is too small ($size bytes) — build may be missing DLL/resources. Re-run: .\scripts\build.ps1" }
-Write-Host "ZIP: $ZipPath  ($([math]::Round($size/1MB,1)) MB)"
+if ($size -lt $minBytes) { throw "ZIP is too small ($size bytes). Re-run build. Missing DLLs or resources?" }
+$mb = [math]::Round($size / 1MB, 1)
+Write-Host "ZIP: $ZipPath  ($mb MB)"
 Get-Item -LiteralPath $ZipPath | Select-Object Name, Length, LastWriteTime
