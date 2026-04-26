@@ -1,0 +1,19 @@
+# App empaquetada (Nativefier / Electron, ~150MB+; va en el ZIP de la Release, no en el repo)
+Noises Online-win32-x64/
+out-tray/
+dist/
+
+# Paquetes y SO
+node_modules/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Editor
+.idea/
+.vscode/
+*.code-workspace
+
+# Zips de release generados en la raíz
+/*.zip

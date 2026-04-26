@@ -1,0 +1,30 @@
+# Compila y publica un ZIP al crear un tag v* (p. ej. v1.0.0)
+name: Release (Windows)
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Nativefier
+        run: npm install -g nativefier
+      - name: Build app
+        shell: pwsh
+        run: ./scripts/build.ps1
+      - name: Create ZIP
+        shell: pwsh
+        run: ./scripts/zip-release.ps1
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Noises-Online-*-Win32-x64.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
