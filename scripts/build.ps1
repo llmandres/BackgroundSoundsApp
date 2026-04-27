@@ -3,8 +3,10 @@ $ErrorActionPreference = "Stop"
 $Root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $OutParent = Join-Path $Root "dist"
 $Css = Join-Path $Root "nativefier-assets\dark-theme.css"
+$Js = Join-Path $Root "nativefier-assets\inject-open-url.js"
 $Ico = Join-Path $Root "nativefier-assets\app.ico"
 if (-not (Test-Path -LiteralPath $Css)) { throw "Missing: $Css" }
+if (-not (Test-Path -LiteralPath $Js)) { throw "Missing: $Js" }
 if (-not (Test-Path -LiteralPath $Ico)) { throw "Missing: $Ico" }
 if (-not (Get-Command nativefier -ErrorAction SilentlyContinue)) { throw "Install nativefier: npm install -g nativefier" }
 $nfSub = "Noises Online-win32-x64"
@@ -15,7 +17,7 @@ nativefier "https://noises.online" $OutParent `
 	--width 1024 --height 768 `
 	--background-color "#1a1d21" `
 	-p win32 `
-	--inject $Css --icon $Ico `
+	--inject $Css --inject $Js --icon $Ico `
 	--disable-gpu --single-instance --disk-cache-size 10485760 `
 	--tray true
 $built = Join-Path $OutParent $nfSub
