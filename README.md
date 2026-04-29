@@ -31,7 +31,7 @@ Output (everything in **`dist/`** — no subfolder, so the `.exe` is at `dist/No
 - `dist/Noises Online.exe` — do **not** move this file alone; keep it with every file that Nativefier placed in the same directory.
 - `dist/Open-Noises-Online.bat` — optional double-click helper (launches the `.exe` in the same folder). The **release ZIP** zips the whole of `dist/`, so the user sees the `.exe` and all dependencies at the top level of the archive.
 
-**Open a shared link / share yours:** a **circular button** (link icon) sits at the **bottom-left** of the window. Click it to **slide open** a small panel: paste a `https://noises.online/…` URL and **Open**, or use **Copy my link** (current address) and **Pin dialog** (triggers the site’s own share control so the URL includes your mix). **Hide** or **Escape** or click the **FAB again** to close the panel. You can still start the app with a URL: `"Noises Online.exe" "https://noises.online/…"` (quoted).
+**Open a shared link / share yours:** a **circular button** (link icon) sits at the **bottom-left** of the window. Click it to **slide open** a small panel: paste a noises.online URL and **Open**. **Copy my link** builds the same URL the site uses for sharing (`https://noises.online/player.php?g=…`), not the address bar. **Pin dialog** opens the site’s own share prompt if you prefer. **Hide**, **Escape**, or click the **FAB** again to close. You can still start the app with: `"Noises Online.exe" "https://noises.online/…"` (quoted).
 
 ## Create a release ZIP (for GitHub Releases)
 

@@ -50,10 +50,32 @@
 		}, 2200);
 	}
 
+	function shareUrlFromSite() {
+		try {
+			if (typeof window.genToStr === 'function') {
+				var g = window.genToStr();
+				return 'https://noises.online/player.php?g=' + g;
+			}
+		} catch (e) { /* ignore */ }
+		return null;
+	}
+
 	function copyMyLink() {
-		var url = window.location.href.replace(/#$/, '');
+		var fromSite = shareUrlFromSite();
+		var url = fromSite || window.location.href.replace(/#$/, '');
+		if (fromSite && fromSite.indexOf('g=') !== -1) {
+			var q = fromSite.split('g=')[1] || '';
+			if (!q) {
+				toast('No active sounds in your mix — pick some noises first (then copy again).');
+				return;
+			}
+		}
 		function done(ok) {
-			toast(ok ? 'Link copied to clipboard.' : 'Could not copy — select the address bar (Ctrl+L) and copy.');
+			toast(
+				ok
+					? 'Share link copied (includes your current mix).'
+					: 'Could not copy — try Pin dialog / Ctrl+C from the prompt.'
+			);
 		}
 		if (navigator.clipboard && navigator.clipboard.writeText) {
 			navigator.clipboard.writeText(url).then(function () { done(true); }).catch(function () {
@@ -187,7 +209,7 @@
 		var sub = doc.createElement('p');
 		sub.className = 'noises-openurl-subtle';
 		sub.textContent =
-			'Tip: if the copied link has no mix in it, tap Pin dialog first, then copy again.';
+			'Copy my link uses the same URL as the site pin (your current noises). Pin dialog still opens the site prompt if you prefer.';
 
 		var btnHide = doc.createElement('button');
 		btnHide.type = 'button';
